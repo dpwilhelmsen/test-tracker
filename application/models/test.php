@@ -1,5 +1,38 @@
 <?php
+use Laravel\Auth\Drivers\Eloquent;
+
 class Test extends Eloquent
 {
+	public static $timestamps = true;
 	
+	public function comments()
+	{
+		return $this->has_many('Comment');
+	}
+	
+	public function defects()
+	{
+		return $this->has_many('Defect');
+	}
+	
+	public function scheduled_tests()
+	{
+		return $this->belongs_to('Scheduled_Test');
+	}
+	
+	public function sessions()
+	{
+		
+	}
+	
+	public function taxonomy()
+	{
+		return $this->has_many_and_belongs_to('Taxonomy');
+	}
+
+	public function user()
+	{
+		return $this->has_many_and_belongs_to('User');
+	}
+
 }
