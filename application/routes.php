@@ -111,3 +111,8 @@ Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::to('login');
 });
+// Process Logout process
+Route::get('logout', function() {
+	Auth::logout();
+    return Redirect::to('/');
+});
