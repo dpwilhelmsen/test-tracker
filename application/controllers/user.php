@@ -8,9 +8,13 @@ public function action_authenticate()
 	$new_user = Input::get('new_user', 'off');
 	if( $new_user == 'on' ) {
 		try {
+			$username = Input::get('username');
+			$display_name = Input::get('display_name');
 			$user = new User();
 			$user->email = $email;
 			$user->password = Hash::make($password);
+			$user->username = trim($username);
+			$user->name = $display_name;
 			$user->save();
 			Auth::login($user);
 			return Redirect::to('dashboard/index');

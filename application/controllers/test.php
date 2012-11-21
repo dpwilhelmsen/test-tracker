@@ -7,12 +7,6 @@ class Test_Controller extends Base_Controller {
 		//return View::make('home.index');
 	}
 	
-	public function action_new()
-	{
-		//echo 'Test';
-		return View::make('test.new');
-	}
-	
 	/**
 	 * Processes the form to add new tests
 	 */
@@ -23,28 +17,43 @@ class Test_Controller extends Base_Controller {
             $input['description'] = filter_var($input['description'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
         }
         $rules = array(
-            'photo' => 'required|image|max:500', //photo upload must be an image and must not exceed 500kb
-            'description' => 'required' //description is required
+        	'title' => 'required',
+        	'description' => 'required',
+        	'type' => 'required', 
+        	'section' => 'required', 
+        	'project' => 'required',
+        	'conditions' => 'required', 
+        	'steps' => 'required',
         );
+        /*
+         * 
+         */
         $validation = Validator::make($input, $rules);
         if( $validation->fails() ) {
             return Redirect::to('dashboard')->with_errors($validation);
         }
-        $extension = File::extension($input['photo']['name']);
-        $directory = path('public').'uploads/'.sha1(Auth::user()->id);
-        $filename = sha1(Auth::user()->id.time()).".{$extension}";
-        $upload_success = Input::upload('photo', $directory, $filename);
-        if( $upload_success ) {
-            $photo = new Photo(array(
-                'location' => URL::to('uploads/'.sha1(Auth::user()->id).'/'.$filename),
-                'description' => $input['description']
-            ));
-            Auth::user()->photos()->insert($photo);
-            Session::flash('status_success', 'Successfully uploaded your new Instapic');
-        } else {
-            Session::flash('status_error', 'An error occurred while uploading your new Instapic - please try again.');
-        }
+            $test = new Test();
+			$test->name = Input::get('title');
+			$test->description = Input::get('description');
+			$test->test_type = Input::get('type');
+			$test->status = Input::get('status');
+			$test->section = Input::get('section');
+			$test->project = Input::get('project');
+			$test->conditions = Input::get('conditions');
+			$test->steps = Input::get('steps');
+			$test->status = 1;
+			/*$test->assigned_id = Input::get('title');
+			$test->author_id = Input::get('title');*/
+			$test->save();
         return Redirect::to('dashboard');
+	}
+	public function action_new()
+	{
+		return View::make('test.new');
+	}
+	public function action_view($id)
+	{
+		
 	}
 
 }

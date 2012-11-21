@@ -4,35 +4,21 @@
         <h3>Add a New Test</h3>
     </div>
     <div class="modal-body">
-        <form method="post" action="{{ URL::to('photo/upload') }}" id="create_modal_form">
-			<div class="formrow">
-				<label for="txt_TestTitle" id="TestTitle-ariaLabel">Test Title</label>
-				<input id="txt_TestTitle" name="txt_TestTitle" type="text" aria-labelledby="TestTitle-ariaLabel" />
-			</div>
-			<div class="formrow">
-				<label for="txtarea_Description" id="Description-ariaLabel">Description</label>
-				<textarea id="txtarea_Description" name="txtarea_Description" cols="20" rows="3" aria-labelledby="Description-ariaLabel"></textarea>
-			</div>
-			<div class="formrow">
-				<label for="txt_Type" id="Type-ariaLabel">Type</label>
-				<input id="txt_Type" name="txt_Type" type="text" aria-labelledby="Type-ariaLabel" />
-			</div>
-			<div class="formrow">
-				<label for="txt_Section" id="Section-ariaLabel">Section</label>
-				<input id="txt_Section" name="txt_Section" type="text" aria-labelledby="Section-ariaLabel" />
-			</div>
-			<div class="formrow">
-				<label for="txt_Project" id="Project-ariaLabel">Project</label>
-				<input id="txt_Project" name="txt_Project" type="text" aria-labelledby="Project-ariaLabel" />
-			</div>
-			<div class="formrow">
-				<label for="txtarea_Conditions" id="Conditions-ariaLabel">Conditions</label>
-				<textarea id="txtarea_Conditions" name="txtarea_Conditions" cols="20" rows="3" aria-labelledby="Conditions-ariaLabel"></textarea>
-			</div>
-			<div class="formrow">
-				<label for="txtarea_Steps" id="Steps-ariaLabel">Steps</label>
-				<textarea id="txtarea_Steps" name="txtarea_Steps" cols="20" rows="3" aria-labelledby="Steps-ariaLabel"></textarea>
-			</div>
+        <form class="well" method="post" action="{{ URL::to('test/add') }}" id="create_modal_form">
+			<label for="title">Test Title</label>
+			<input name="title" type="text" />
+			<label for="description">Description</label>
+			<textarea name="description" cols="20" rows="3"></textarea>
+			<label for="type">Type</label>
+			<input name="type" type="text" />
+			<label for="section">Section</label>
+			<input name="section" type="text" />
+			<label for="project" id="project">Project</label>
+			<input name="project" type="text" />
+			<label for="conditions">Conditions</label>
+			<textarea name="conditions" cols="20" rows="3"></textarea>
+			<label for="steps">Steps</label>
+			<textarea name="steps" cols="20" rows="3"></textarea>
 		</form>
     </div>
     <div class="modal-footer">

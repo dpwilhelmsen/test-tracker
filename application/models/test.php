@@ -1,5 +1,4 @@
 <?php
-use Laravel\Auth\Drivers\Eloquent;
 
 class Test extends Eloquent
 {
