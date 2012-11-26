@@ -13,10 +13,7 @@ class Create_Tests {
 			$table->increments('id');
 			$table->string('name', 255);
 			$table->text('description');
-			$table->integer('test_type');
 			$table->integer('status');
-			$table->integer('section');
-			$table->integer('project');
 			$table->text('conditions');
 			$table->text('steps');
 			$table->integer('assigned_id');

@@ -53,7 +53,20 @@ class Test_Controller extends Base_Controller {
 	}
 	public function action_view($id)
 	{
-		
+		$test = Test::find($id);
+		$types = $test->types()->get();
+		$sections = $test->sections()->get();
+		$projects = $test->projects()->get();
+		$tax_array = array('test_type'=>$types,'section'=>$sections,'project'=>$projects,);
+		return View::make('test.view')
+			->with('test', $test)
+			->with('taxonomy', $tax_array);
+	}
+	public function action_all()
+	{
+		$tests = Test::all();
+		return View::make('test.all')
+			->with('tests', $tests);
 	}
 
 }

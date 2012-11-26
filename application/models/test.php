@@ -24,11 +24,21 @@ class Test extends Eloquent
 		
 	}
 	
-	public function taxonomy()
+	public function types()
 	{
-		return $this->has_many_and_belongs_to('Taxonomy');
+		return $this->has_many_and_belongs_to('Taxonomy', 'test_types');
 	}
-
+	
+	public function sections()
+	{
+		return $this->has_many_and_belongs_to('Taxonomy', 'test_sections');
+	}
+	
+	public function projects()
+	{
+		return $this->has_many_and_belongs_to('Taxonomy', 'test_projects');
+	}
+	
 	public function user()
 	{
 		return $this->has_many_and_belongs_to('User');

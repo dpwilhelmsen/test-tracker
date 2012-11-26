@@ -13,6 +13,7 @@
 */
 
 ini_set('display_errors', 'On');
+Laravel\Database\Eloquent\Pivot::$timestamps = false;
 
 /*
 |--------------------------------------------------------------------------

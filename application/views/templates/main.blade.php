@@ -43,6 +43,9 @@
               <li><a href="#" onclick="$('#create_modal').modal({backdrop: 'static'});">
           			Add New Test</a></li>
               @endif
+              <li>
+              	<a href="{{ URL::to('test/all')}}">All Tests</a>
+              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
