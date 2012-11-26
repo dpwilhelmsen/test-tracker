@@ -61,6 +61,7 @@ Laravel\Autoloader::$aliases = $aliases;
 
 Autoloader::map(array(
 	'Base_Controller' => path('app').'controllers/base.php',
+	'Test_Session' => path('app').'models/test_session.php',
 ));
 
 /*

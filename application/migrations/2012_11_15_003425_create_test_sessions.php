@@ -1,6 +1,6 @@
 <?php
 
-class Create_Sessions {
+class Create_Test_Sessions {
 
 	/**
 	 * Make changes to the database.
@@ -12,7 +12,7 @@ class Create_Sessions {
 		Schema::create('sessions', function($table) {
 			$table->increments('id');
 			$table->string('title', 255);
-			$table->integer('author_id');
+			$table->integer('user_id');
 			$table->date('completed_at');
 			$table->timestamps();
 		});
