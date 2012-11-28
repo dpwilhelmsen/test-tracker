@@ -36,6 +36,7 @@ Route::get('/', function()
 {
 	return View::make('home.index');
 });*/
+Route::get('sessions/(:any)', 'test_session@(:1)');
 Route::controller(Controller::detect());
 //Route::get('about', 'home@about');
 

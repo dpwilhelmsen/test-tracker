@@ -10,8 +10,10 @@
 	<tbody>
 @foreach ($sessions as $session)
         <tr>
-            <td>{{ HTML::link('session/view/'.$session->id, $session->title) }}</td>
-            <td>{{ $session->user()->first()->name}}</td>
+            <td>
+            {{ HTML::link('sessions/view/'.$session['session']->id, $session['session']->title) }}
+            </td>
+            <td>{{ $session['user']->name}}</td>
         </tr>
 @endforeach
 	</tbody>
