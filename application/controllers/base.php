@@ -14,4 +14,10 @@ class Base_Controller extends Controller {
 		return Response::error('404');
 	}
 
+	public function __construct()
+	{
+		Asset::add('style', 'css/style.css');
+		Asset::add('modal-forms', 'js/forms.js');
+		parent::__construct();
+	}
 }

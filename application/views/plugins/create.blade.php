@@ -23,6 +23,6 @@
     </div>
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-        <button type="button" onclick="$('#create_modal_form').submit();" class="btn btn-primary">Create Test</a>
+        <button type="button" id="add-test-button" class="btn btn-primary">Create Test</a>
     </div>
 </div>

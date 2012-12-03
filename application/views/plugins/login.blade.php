@@ -36,5 +36,5 @@
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Cancel</a>
-		<button type="button" onclick="$('div.tab-pane.active form.modal-form').submit();" class="btn btn-primary">Login or Register</a>
+		<button type="button" id="login-button" class="btn btn-primary">Login or Register</a>
 	</div>
