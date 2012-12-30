@@ -26,17 +26,17 @@ class Test extends Eloquent
 	
 	public function types()
 	{
-		return $this->has_many_and_belongs_to('Taxonomy', 'test_types');
+		return $this->has_many_and_belongs_to('Type');
 	}
 	
 	public function sections()
 	{
-		return $this->has_many_and_belongs_to('Taxonomy', 'test_sections');
+		return $this->has_many_and_belongs_to('Area');
 	}
 	
 	public function projects()
 	{
-		return $this->has_many_and_belongs_to('Taxonomy', 'test_projects');
+		return $this->has_many_and_belongs_to('Project');
 	}
 	
 	public function user()

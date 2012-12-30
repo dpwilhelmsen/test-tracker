@@ -35,10 +35,10 @@ class Test_Controller extends Base_Controller {
             $test = new Test();
 			$test->name = Input::get('title');
 			$test->description = Input::get('description');
-			$test->test_type = Input::get('type');
+			//$test->test_type = Input::get('type');
 			$test->status = Input::get('status');
-			$test->section = Input::get('section');
-			$test->project = Input::get('project');
+			//$test->section = Input::get('section');
+			//$test->project = Input::get('project');
 			$test->conditions = Input::get('conditions');
 			$test->steps = Input::get('steps');
 			$test->status = 1;

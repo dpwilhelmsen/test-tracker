@@ -1,6 +1,6 @@
 <?php
 
-class Create_Taxonomies {
+class Create_Areas {
 
 	/**
 	 * Make changes to the database.
@@ -9,10 +9,11 @@ class Create_Taxonomies {
 	 */
 	public function up()
 	{
-		Schema::create('taxonomies', function($table) {
+		Schema::create('areas', function ($table){
 			$table->increments('id');
-			$table->string('type', 255);
 			$table->string('title',255);
+			$table->text('description');
+			$table->timestamps();
 		});
 	}
 
@@ -23,7 +24,7 @@ class Create_Taxonomies {
 	 */
 	public function down()
 	{
-		Scheme::drop('taxonomies');
+		Schema::drop('areas');
 	}
 
 }

@@ -2,7 +2,7 @@
 
 use Laravel\Database\Schema;
 
-class Create_Test_Types {
+class Create_Projects {
 
 	/**
 	 * Make changes to the database.
@@ -11,12 +11,13 @@ class Create_Test_Types {
 	 */
 	public function up()
 	{
-		Schema::create('test_types', function($table) {
+		Schema::create('projects', function ($table){
 			$table->increments('id');
-			$table->integer('test_id');
-			$table->integer('taxonomy_id');
+			$table->string('title',255);
+			$table->text('description');
+			$table->boolean('active');
 			$table->timestamps();
-		});	
+		});
 	}
 
 	/**
@@ -26,7 +27,7 @@ class Create_Test_Types {
 	 */
 	public function down()
 	{
-		Schema::drop('test_types');
+		Schema::drop('projects');
 	}
 
 }

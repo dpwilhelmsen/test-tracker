@@ -7,7 +7,8 @@
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  * @link     http://laravel.com
  */
-
+require( '../application/php_error.php' );
+\php_error\reportErrors();
 // --------------------------------------------------------------
 // Tick... Tock... Tick... Tock...
 // --------------------------------------------------------------

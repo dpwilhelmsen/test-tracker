@@ -1,6 +1,8 @@
 <?php
 
-class Create_Test_Sessions {
+use Laravel\Database\Schema;
+
+class Create_Test_Type {
 
 	/**
 	 * Make changes to the database.
@@ -9,13 +11,12 @@ class Create_Test_Sessions {
 	 */
 	public function up()
 	{
-		Schema::create('test_sessions', function($table) {
+		Schema::create('test_type', function($table) {
 			$table->increments('id');
-			$table->string('title', 255);
-			$table->integer('user_id');
-			$table->date('completed_at');
+			$table->integer('test_id');
+			$table->integer('type_id');
 			$table->timestamps();
-		});
+		});	
 	}
 
 	/**
@@ -25,7 +26,7 @@ class Create_Test_Sessions {
 	 */
 	public function down()
 	{
-		Schema::drop('sessions');
+		Schema::drop('test_type');
 	}
 
 }
