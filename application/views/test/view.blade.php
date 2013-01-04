@@ -6,7 +6,10 @@
         <p><b>Test Type: </b>@foreach ($taxonomy['test_type'] as $type) {{ $type->title }} @endforeach</p>
         <p><b>Current Status: </b>{{ $test->status }}</p>
         <p><b>Section: </b>@foreach ($taxonomy['section'] as $section) {{ $section->title }} @endforeach</p>
-        <p><b>Project: </b>@foreach ($taxonomy['project'] as $project) {{ $project->title }} @endforeach</p>
+        <p><b>Project: </b>
+        @foreach ($taxonomy['project'] as $project) 
+        	{{ HTML::link('project/view/'.$project->id, $project->title) }} 
+        @endforeach</p>
         <p><b>Conditions: </b>{{ $test->conditions }}</p>
         <p><b>Steps: </b>{{ $test->steps }}</p>
         <p><b>Assigned to: </b>{{ $test->assigned_id }}</p>
