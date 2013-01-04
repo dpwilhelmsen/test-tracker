@@ -1,6 +1,4 @@
 <?php
-use Bootstrapper\Buttons;
-use Bootstrapper\ButtonGroup;
 
 class Project_Controller extends Base_Controller
 {
