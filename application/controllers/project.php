@@ -20,7 +20,8 @@ class Project_Controller extends Base_Controller
 		return View::make('project.view')
 			->with('tests', $tests)
 			->with('project', $project)
-			->with('btn', $button_group);
+			->with('btn', $button_group)
+			->with('base', URL::base());
 	}
 	public function action_add()
 	{
