@@ -31,15 +31,23 @@
 |		});
 |
 */
-/*
+
 Route::get('/', function()
 {
 	return View::make('home.index');
-});*/
+});
+Route::post('replace', function()
+{
+	// If you had a database you could easily fetch the content from the database here...
+	$data = array(
+		"html" => '<div id="hero-content"><h1>NEW shiny content from AJAX</h1><p>This content was loaded dynamically from a route "replace" </p></div>'
+	);
+	
+	return Response::json($data);
+});
 Route::get('sessions/(:any)', 'test_session@(:1)');
 Route::post('sessions/(:any)', 'test_session@(:1)');
 Route::controller(Controller::detect());
-//Route::get('about', 'home@about');
 
 /*
 |--------------------------------------------------------------------------

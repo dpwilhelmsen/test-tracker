@@ -3,12 +3,11 @@
  * Laravel - A PHP Framework For Web Artisans
  *
  * @package  Laravel
- * @version  3.2.11
+ * @version  3.2.12
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  * @link     http://laravel.com
  */
-require( '../application/php_error.php' );
-\php_error\reportErrors();
+
 // --------------------------------------------------------------
 // Tick... Tock... Tick... Tock...
 // --------------------------------------------------------------

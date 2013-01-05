@@ -76,7 +76,7 @@
       		@include('plugins/login')
       	@endif
 </body>
-@if($base)
+@if(isset($base))
 	<script type="text/javascript">var BASE = "{{ $base }}";</script>
 @endif
 </html>
