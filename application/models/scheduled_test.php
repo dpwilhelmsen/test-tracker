@@ -1,8 +1,7 @@
 <?php
-use Laravel\Auth\Drivers\Eloquent;
-
 class Scheduled_Test extends Eloquent
 {
+	public static $table = 'scheduled_tests';
 	public function session()
 	{
 		return $this->belongs_to('Session');

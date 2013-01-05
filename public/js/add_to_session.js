@@ -6,7 +6,7 @@
 		         ids.push(this.value);
 		    });
 			alert('All Tests'+ ids);
-		    session_submit(ids);
+		    session_submit(ids, $('#project_id').val());
 		});
 		
 		$('#selected_tests').on('click', function(){
@@ -15,29 +15,19 @@
 		         ids.push(this.value);
 		    });
 			alert('Selected Tests:' + ids);
-		    session_submit(ids);
+		    session_submit(ids, $('#project_id').val());
 		});
 	});
 	
-	function session_submit(ids)
+	function session_submit(ids, project)
 	{
-		/*$.ajax({url:"/sessions/create",data:ids,success:function(result){
-		    alert(result);
-		  }
-		});
 		$.ajax({
-			   type: "POST",
-			   url: BASE+"/sessions/create",
-			   data: "name=John&location=Boston",
-			   success: function(msg){
-			     alert( "Data Saved: " + msg );
-			   }
-			 });*/
-		$.post(BASE+'/replace', {
-		    name: "Dayle",
-		    age: 27
-		}, function(data) {
-		    alert(data);
+			type: "POST",
+			url: BASE+"/project/create_session",
+			data: {'tests':ids, 'project':project},
+			success: function(response){
+				alert(response['data']);
+			}
 		});
 	}
 	

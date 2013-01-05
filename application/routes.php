@@ -32,10 +32,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('home.index');
-});
 Route::post('replace', function()
 {
 	// If you had a database you could easily fetch the content from the database here...
