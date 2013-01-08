@@ -12,7 +12,7 @@ class Create_Test_Sessions {
 		Schema::create('test_sessions', function($table) {
 			$table->increments('id');
 			$table->string('title', 255);
-			$table->string('status', 255);
+			$table->boolean('active');
 			$table->integer('project_id');
 			$table->integer('user_id');
 			$table->date('completed_at');

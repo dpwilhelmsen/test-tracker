@@ -1,14 +1,14 @@
 <h2> Active Sessions</h2>
-@if (isset($sessions['active']) and !empty($sessions['active']))
-	@foreach ($sessions['active'] as $session)
-		Session #{{ $session->id }} <br />
+@if (isset($sessions[1]) and !empty($sessions[1]))
+	@foreach ($sessions[1] as $session)
+		{{ HTML::link('session/view/'.$session->id, 'Session #'.$session->id) }}<br />
 	@endforeach
 @else
 	No Active Sessions
 @endif
 <h2>Completed Sessions</h2>
-@if (isset($sessions['completed']) and !empty($sessions['completed']))
-	@foreach ($sessions['completed'] as $session)
+@if (isset($sessions[0]) and !empty($sessions[0]))
+	@foreach ($sessions[0] as $session)
 		Session #{{ $session->id }} <br />
 	@endforeach
 @else

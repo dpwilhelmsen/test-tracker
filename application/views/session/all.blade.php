@@ -8,12 +8,12 @@
 		</tr>
 	</thead>
 	<tbody>
-@foreach ($sessions as $session)
+@foreach ($sessions[1] as $session)
         <tr>
             <td>
-            {{ HTML::link('sessions/view/'.$session['session']->id, $session['session']->title) }}
+            {{ HTML::link('sessions/view/'.$session->id, $session->title) }}
             </td>
-            <td>{{ $session['user']->name}}</td>
+            <td></td>
         </tr>
 @endforeach
 	</tbody>

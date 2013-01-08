@@ -13,13 +13,4 @@ class Project extends Eloquent
 		return $this->has_many('Test_Session');
 	}
 	
-	public function active_sessions()
-	{
-		return $this->sessions()->where_status('active');
-	}
-	
-	public function completed_sessions()
-	{
-		return $this->sessions()->where_status('completed');
-	}
 }

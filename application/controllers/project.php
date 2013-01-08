@@ -1,5 +1,7 @@
 <?php
 
+use Laravel\URL;
+
 use Laravel\Response;
 
 use Laravel\Input;
@@ -14,8 +16,9 @@ class Project_Controller extends Base_Controller
 	{
 		$project = Project::find($id);
 		$tests = $project->tests()->get();
-		$sessions['active'] = $project->active_sessions()->get();
-		$sessions['completed'] = $project->completed_sessions()->get();
+		$sessions = Underscore::group($project->sessions()->get(), function($session){
+			return (bool) $session->active;
+		});
 		$button_group = ButtonGroup::open(null, array('class'=>'pull-right bottom-margin'));
 		  $button_group .= Button::normal('Create New Session From Selected', array('id'=>'selected_tests'));
 		  $button_group .= Button::normal('Add All to New Session', array('id'=>'all_tests')); 
@@ -43,7 +46,36 @@ class Project_Controller extends Base_Controller
 	}
 	public function action_add()
 	{
-		
+		$input = Input::all();
+		if( isset($input['description']) ) {
+			$input['description'] = filter_var($input['description'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		}
+		$rules = array(
+				'title' => 'required',
+		);
+		$validation = Validator::make($input, $rules);
+		if( $validation->fails() ) {
+			return Redirect::to('dashboard')->with_errors($validation);
+		}
+		$project = new Project();
+		$project->title = $input['title'];
+		$project->description = $input['description'];
+		$project->active = 1;
+		$project->save();
+		return Redirect::to('dashboard');
+	}
+	
+	public function action_new()
+	{
+		$form = '';
+		$form .= Form::horizontal_open(URL::to('project/add'));
+		$form .= Form::control_group(Form::label('title', 'Title'),
+				Form::xlarge_text('title'), '');
+		$form .= Form::control_group(Form::label('description', 'Description'),
+				Form::xlarge_textarea('description', '', array('rows' => '3')));
+		$form .= Form::actions(array(Button::primary_submit('Save', array('id'=>'new-project-btn')), Form::button('Cancel')));
+		$form .= Form::close();
+		return View::make('project.new')->with('form', $form);
 	}
 	
 	public function action_create_session()
@@ -62,5 +94,17 @@ class Project_Controller extends Base_Controller
 			$scheduled_test->save();
 		}
 		return Response::json(array('status'=>'success'));
+	}
+	
+	public function action_all()
+	{
+		$projects = Project::all();
+		$projects_sorted['active'] = Underscore::filter($projects, function($project){
+			return (int) $project->active === 1;
+		});
+		$projects_sorted['completed'] = Underscore::filter($projects, function($project){
+			return (int) $project->active === 0;
+		});
+		return View::make('project.all')->with('projects', $projects_sorted);
 	}
 }

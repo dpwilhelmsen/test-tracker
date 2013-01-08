@@ -11,5 +11,8 @@
 		$('#add-to-session-button').on('click', function(){
 			$('#session_modal_form').submit();
 		});
+		$('#new-project-btn').on('click', function(){
+			$('')
+		});
 	});
 }(jQuery, window, document));

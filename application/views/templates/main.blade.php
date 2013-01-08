@@ -46,10 +46,13 @@
           			Add New Test</a></li>
               @endif
               <li>
-              	<a href="{{ URL::to('test/all')}}">All Tests</a>
+              	<a href="{{ URL::to('project/all')}}">Projects</a>
               </li>
               <li>
-              	<a href="{{ URL::to('sessions/all')}}">All Sessions</a>
+              	<a href="{{ URL::to('test/all')}}">Tests</a>
+              </li>
+              <li>
+              	<a href="{{ URL::to('sessions/all')}}">Sessions</a>
               </li>
             </ul>
           </div><!--/.nav-collapse -->
