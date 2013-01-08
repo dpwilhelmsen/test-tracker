@@ -11,7 +11,7 @@
 @foreach ($sessions[1] as $session)
         <tr>
             <td>
-            {{ HTML::link('sessions/view/'.$session->id, $session->title) }}
+            {{ HTML::link('session/view/'.$session->id, $session->title) }}
             </td>
             <td></td>
         </tr>

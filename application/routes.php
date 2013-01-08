@@ -41,8 +41,9 @@ Route::post('replace', function()
 	
 	return Response::json($data);
 });
-Route::get('session/(:any)', 'test_session@(:1)');
-Route::post('session/(:any)', 'test_session@(:1)');
+Route::any('session', 'test_session@index');
+Route::any('session/(:any?)', 'test_session@(:1)');
+Route::any('session/(:any)/(:any?)', 'test_session@(:1)');
 Route::controller(Controller::detect());
 
 /*

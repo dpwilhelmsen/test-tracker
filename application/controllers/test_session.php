@@ -13,7 +13,6 @@ class Test_Session_Controller extends Base_Controller
 		$sessions_with_data = Underscore::group($sessions, function($session){
 			return (bool) $session->active;
 		});
-		var_dump($sessions_with_data);
 		return View::make('session.all')
 			->with('sessions', $sessions_with_data);
 	}
@@ -22,6 +21,14 @@ class Test_Session_Controller extends Base_Controller
 	{
 		$input = Input::all();
 		var_dump($input);
+	}
+	
+	public function action_view($id)
+	{
+		$session = Test_Session::find($id);
+		$scheduled_tests = $session->tests()->get();
+		return View::make('session.view')
+			->with('scheduled_tests', $scheduled_tests);
 	}
 	
 	protected function createSession()

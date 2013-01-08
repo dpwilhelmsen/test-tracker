@@ -9,7 +9,7 @@ class Scheduled_Test extends Eloquent
 	
 	public function test()
 	{
-		return $this->has_one('Test');
+		return Test::where('id', '=', $this->test_id)->first();
 	}
 	
 	public function status()

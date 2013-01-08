@@ -9,4 +9,9 @@ class Test_Session extends Eloquent
 	{
 		return $this->belongs_to('Project');
 	}
+	
+	public function tests()
+	{
+		return $this->has_many('Scheduled_Test', 'session_id');
+	}
 }
