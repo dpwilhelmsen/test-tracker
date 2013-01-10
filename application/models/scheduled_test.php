@@ -2,6 +2,8 @@
 class Scheduled_Test extends Eloquent
 {
 	public static $table = 'scheduled_tests';
+	public $includes = array('test');
+	
 	public function session()
 	{
 		return $this->belongs_to('Session');
@@ -9,7 +11,7 @@ class Scheduled_Test extends Eloquent
 	
 	public function test()
 	{
-		return Test::where('id', '=', $this->test_id)->first();
+		return $this->belongs_to('Test');
 	}
 	
 	public function status()

@@ -14,7 +14,9 @@ class Create_Scheduled_Tests {
 			$table->integer('session_id');
 			$table->integer('test_id');
 			$table->integer('status');
+			$table->integer('assigned_user');
 			$table->integer('completed_user');
+			$table->integer('weight');
 			$table->integer('defects');
 			$table->timestamps();
 		});
