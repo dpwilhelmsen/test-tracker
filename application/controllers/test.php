@@ -47,10 +47,12 @@ class Test_Controller extends Base_Controller {
 			$test->save();
         return Redirect::to('dashboard');
 	}
+	
 	public function action_new()
 	{
 		return View::make('test.new');
 	}
+	
 	public function action_view($id)
 	{
 		$test = Test::find($id);
@@ -62,6 +64,7 @@ class Test_Controller extends Base_Controller {
 			->with('test', $test)
 			->with('taxonomy', $tax_array);
 	}
+	
 	public function action_all()
 	{
 		$tests = Test::all();

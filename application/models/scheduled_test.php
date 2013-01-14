@@ -14,11 +14,6 @@ class Scheduled_Test extends Eloquent
 		return $this->belongs_to('Test');
 	}
 	
-	public function status()
-	{
-		
-	}
-	
 	public function completed_user()
 	{
 		return $this->has_one('User');

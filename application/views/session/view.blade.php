@@ -12,7 +12,7 @@
 @foreach ($scheduled_tests as $scheduled_test)
         <tr>
             <td>
-            {{ HTML::link('session/view/'.$scheduled_test->id, $scheduled_test->test()->first()->name) }}
+            {{ HTML::link('session/test/'.$session->id.'/'.$scheduled_test->test()->first()->id, $scheduled_test->test()->first()->name) }}
             </td>
             <td></td>
         </tr>

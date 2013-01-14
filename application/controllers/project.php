@@ -16,9 +16,11 @@ class Project_Controller extends Base_Controller
 	{
 		$project = Project::find($id);
 		$tests = $project->tests()->get();
-		$sessions = Underscore::group($project->sessions()->get(), function($session){
-			return (bool) $session->active;
-		});
+		$sessions = $project->sessions()->get();
+		if($sessions)
+			$sessions = Underscore::group($sessions, function($session){
+				return (bool) $session->active;
+			});
 		$button_group = ButtonGroup::open(null, array('class'=>'pull-right bottom-margin'));
 		  $button_group .= Button::normal('Create New Session From Selected', array('id'=>'selected_tests'));
 		  $button_group .= Button::normal('Add All to New Session', array('id'=>'all_tests')); 
