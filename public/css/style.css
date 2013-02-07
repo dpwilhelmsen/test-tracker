@@ -58,3 +58,13 @@ hr.reduced-margin {
 	float: left;
 	width: 420px;
 }
+
+.form-list {
+	list-style:none;
+	text-indent: 0;
+	margin-left: 0;	
+}
+
+.show-add {
+	cursor:pointer;
+}

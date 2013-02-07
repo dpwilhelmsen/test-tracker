@@ -38,14 +38,21 @@ class Test_Controller extends Base_Controller {
 			//$test->test_type = Input::get('type');
 			$test->status = Input::get('status');
 			//$test->section = Input::get('section');
-			//$test->project = Input::get('project');
+			$project = Input::get('project');
 			$test->conditions = Input::get('conditions');
 			$test->steps = Input::get('steps');
 			$test->status = 1;
 			/*$test->assigned_id = Input::get('title');
 			$test->author_id = Input::get('title');*/
 			$test->save();
-        return Redirect::to('dashboard');
+			if(!empty($project)) {
+				$project = new Project(array('title'=>$project, 'active'=>true));
+				$test->projects()->insert($project);
+			}
+			foreach (Input::get('project_option') as $project)
+				$test->projects()->attach($project);
+			
+       return Redirect::to('dashboard');
 	}
 	
 	public function action_new()

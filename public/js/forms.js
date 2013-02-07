@@ -14,5 +14,8 @@
 		$('#new-project-btn').on('click', function(){
 			$('')
 		});
+		$('.show-add').on('click', function(){
+			$(this).siblings('.add').toggleClass('hidden');
+		})
 	});
 }(jQuery, window, document));
