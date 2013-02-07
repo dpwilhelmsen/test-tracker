@@ -31,8 +31,24 @@
 					</div>
 				</li>
 			</ul>
-			<label for="type">Type</label>
-			<input name="type" type="text" />
+			<label id="type_group">Type</label>
+			<ul class="form-list">
+			@foreach (Type::all() as $type_option)
+			    <li>
+			    	<label>
+			    		<input value="{{$type_option->id}}" type="checkbox" name="type_option[]" />
+			    		{{ $type_option->title }}
+			    	</label>
+			    </li>
+			@endforeach
+				<li>
+					<a class="show-add">+ Add new type</a>
+					<div class="hidden add">
+						<label for="type" id="project">Type Name</label>
+						<input name="type" type="text" />
+					</div>
+				</li>
+			</ul>
 			<label for="section">Section</label>
 			<input name="section" type="text" />
 			<label for="conditions">Conditions</label>
