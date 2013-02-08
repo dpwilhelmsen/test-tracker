@@ -18,10 +18,8 @@ class Test_Controller extends Base_Controller {
         }
         $rules = array(
         	'title' => 'required',
-        	'description' => 'required',
-        	'type' => 'required', 
+        	'description' => 'required', 
         	'section' => 'required', 
-        	'project' => 'required',
         	'conditions' => 'required', 
         	'steps' => 'required',
         );
@@ -38,14 +36,39 @@ class Test_Controller extends Base_Controller {
 			//$test->test_type = Input::get('type');
 			$test->status = Input::get('status');
 			//$test->section = Input::get('section');
-			//$test->project = Input::get('project');
+			$type = Input::get('type');
 			$test->conditions = Input::get('conditions');
 			$test->steps = Input::get('steps');
 			$test->status = 1;
 			/*$test->assigned_id = Input::get('title');
 			$test->author_id = Input::get('title');*/
 			$test->save();
-        return Redirect::to('dashboard');
+			$this->process_projects($test, Input::get('project_option'), Input::get('project'));
+			$this->process_types($test, Input::get('type_option'), Input::get('type'));
+			
+       return Redirect::to('dashboard');
+	}
+	
+	private function process_projects($test, $existing_projects=null, $new_projects=null)
+	{
+		if(empty($existing_projects) && empty($new_projects)) return;
+		if(is_array($existing_projects))
+			foreach ($existing_projects as $project)
+				$test->projects()->attach($project);
+		if(empty($new_projects)) return;
+		$project = new Project(array('title'=>$new_projects, 'active'=>true));
+		$test->projects()->insert($project);
+	}
+	
+	private function process_types($test, $existing_types=null, $new_types=null)
+	{
+		if(empty($existing_types) && empty($new_types)) return;
+		if(is_array($existing_types))
+			foreach ($existing_types as $type)
+				$test->types()->attach($type);
+		if(empty($new_types)) return;
+		$type = new Type(array('title'=>$new_types));
+		$test->types()->insert($type);
 	}
 	
 	public function action_new()
