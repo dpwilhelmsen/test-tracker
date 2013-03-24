@@ -1,12 +1,15 @@
 @layout('templates.main')
 @section('content') 
 <h2>Session Tests</h2>
+@if ( !Auth::guest() )
 {{ $buttons }}
+@endif
 <table class="table table-striped table-bordered table-hover">
 	<thead>
 		<tr>
 			<td>Name</td>
 			<td>Test Status</td>
+			<td>Performed By</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -23,6 +26,11 @@
             @else
             Not Complete
             @endif</td>
+            <td>
+            	@if($scheduled_test->completed_user()->get())
+            		{{ Underscore::first($scheduled_test->completed_user()->get())->username }}
+            	@endif
+            </td>
         </tr>
 @endforeach
 	</tbody>

@@ -16,7 +16,7 @@ class Scheduled_Test extends BaseModel
 	
 	public function completed_user()
 	{
-		return $this->has_one('User');
+		return $this->belongs_to('User', 'completed_user');
 	}
 	
 	public function defects()

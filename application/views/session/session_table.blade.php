@@ -18,7 +18,9 @@
 		<div class="span4">
 			<div class="pull-right">
 			{{ Button::primary_link('session/view/'.$session->id, 'View Results') }}
+			@if ( !Auth::guest() )
 			{{ Button::primary_link('#', 'Requeue Session', array('class'=>'requeue','data-session'=>$session->id)) }}
+			@endif
 			</div>
 		</div>
 	</div>

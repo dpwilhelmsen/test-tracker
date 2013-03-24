@@ -1,6 +1,8 @@
 @layout('templates.main')
 @section('content') 
+@if ( !Auth::guest() )
 <button class="btn btn-primary" type="submit" onclick="$('#session_modal').modal({backdrop: 'static'});">Add Selected to Session</button>
+@endif
 @include('test.test_table')
 <div class="modal hide" id="session_modal">
 	<div class="modal-header">

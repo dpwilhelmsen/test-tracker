@@ -33,6 +33,9 @@
 		});
 		$('.show-add').on('click', function(){
 			$(this).siblings('.add').toggleClass('hidden');
-		})
+		});
+		$('.login-btn').on('click', function(){
+			$('#login_modal').modal({backdrop: 'static'});
+		});
 	});
 }(jQuery, window, document));

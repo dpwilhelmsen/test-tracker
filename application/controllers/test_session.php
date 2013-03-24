@@ -88,6 +88,7 @@ class Test_Session_Controller extends Base_Controller
 				$scheduled_test->status = 0;
 			break;
 		}
+		$scheduled_test = Auth::user()->completed_sechduled_tests()->insert($scheduled_test);
 		if(!$scheduled_test->save())
 			return Response::json(array('error'=>'Error Saving'));
 		$session = Test_Session::find($scheduled_test->session_id);

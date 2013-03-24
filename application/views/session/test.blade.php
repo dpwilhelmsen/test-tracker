@@ -28,9 +28,13 @@
         @elseif($scheduled_test->status == '-1')
         	{{ Button::disabled_danger_link('#', 'Failed') }}
         @else
+        	@if ( !Auth::guest() )
 	        {{ Button::success_link('#', 'Pass', array('class'=>'status-btn', 'data-status'=>'pass')) }}
 	        {{ Button::danger_link('#', 'Fail', array('class'=>'status-btn', 'data-status'=>'fail')) }}
 	        {{ Button::inverse_link('#', 'Skip', array('class'=>'status-btn', 'data-status'=>'skip')) }}
+	        @else
+	        	<h4 class="test-status">Not Complete</h4>
+	        @endif
         @endif
         </div>
         </div>

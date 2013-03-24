@@ -29,7 +29,7 @@
           <a class="brand" href="{{ URL::base() }}">Test Tracker</a>
           <div class="btn-group pull-right">       
             @if ( Auth::guest() )
-              <a class="btn"  onclick="$('#login_modal').modal({backdrop: 'static'});">
+              <a class="btn login-btn">
                 <i class="icon-user"></i> Login
               </a>
             @else

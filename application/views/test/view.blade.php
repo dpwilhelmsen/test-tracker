@@ -6,11 +6,10 @@
         <h1>{{ HTML::link('test/view/'.$test->id, $test->name) }}</h1>
         <hr class="reduced-margin" />
         <div class="row-fluid">
-        <div class="span4">
-        	<h4 class="test-status">Test Status:</h4>
-        </div>
-        <div class="span8 pull-right align-right">
+        <div class="pull-right align-right">
+        @if ( !Auth::guest() )
         	{{ Button::link('test/edit/'.$test->id, 'Edit') }}
+        @endif
         </div>
         </div>
         <hr class="reduced-margin" />

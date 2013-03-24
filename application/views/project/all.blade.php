@@ -1,6 +1,8 @@
 @layout('templates.main')
-@section('content') 
+@section('content')
+@if ( !Auth::guest() ) 
 {{ Button::link('#', 'New Project', array('class'=>'pull-right', 'id'=>'new-project-modal-btn')) }}
+@endif
 <h1>Active Projects</h1>
 @if(!empty($projects['active']))
 <table class="table">
@@ -15,7 +17,9 @@
 		<td>
 		<div class="pull-right">
 			{{ HTML::link('project/view/'.$project->id, 'View', array('class'=>'btn btn-primary')) }}
+			@if ( !Auth::guest() )
 			{{ HTML::link('project/complete/'.$project->id, 'Complete', array('class'=>'btn btn-primary')) }}
+			@endif
 		</div>
 		</td>
 	</tr>
@@ -39,7 +43,9 @@
 		<td>
 		<div class="pull-right">
 			{{ Button::primary_link('project/view/'.$project->id, 'View') }}
+			@if ( !Auth::guest() )
 			{{  Button::primary_link('project/active/'.$project->id, 'Activate') }}
+			@endif
 		</div>
 		</td>
 	</tr>

@@ -1,3 +1,6 @@
+body {
+	background:url('../img/paper_fibers.png') /*From http://subtlepatterns.com/?s=paper+fiber*/
+}
 .inline-block {
 	display: inline-block;
 	margin:2px;
@@ -89,4 +92,8 @@ input[type="text"].title-input {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 
+}
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+	background:none;
 }
