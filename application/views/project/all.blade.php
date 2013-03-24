@@ -1,5 +1,6 @@
 @layout('templates.main')
 @section('content') 
+{{ Button::link('#', 'New Project', array('class'=>'pull-right', 'id'=>'new-project-modal-btn')) }}
 <h1>Active Projects</h1>
 @if(!empty($projects['active']))
 <table class="table">
@@ -47,5 +48,14 @@
 </table>
 @else
 	<p>No Completed Projects</p>
+@endif
+@if(!Auth::guest())
+	<div class="modal hide" id="project_modal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3>Add a New Project</h3>
+    </div>
+	@include('project.new')
+	</div>
 @endif
 @endsection

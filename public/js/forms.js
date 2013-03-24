@@ -25,8 +25,11 @@
 		$('#add-to-session-button').on('click', function(){
 			$('#session_modal_form').submit();
 		});
+		$('#new-project-modal-btn').on('click', function(){
+			$("#project_modal").modal({backdrop: "static"});
+		});
 		$('#new-project-btn').on('click', function(){
-			$('')
+			$('#create-project-form').submit();
 		});
 		$('.show-add').on('click', function(){
 			$(this).siblings('.add').toggleClass('hidden');

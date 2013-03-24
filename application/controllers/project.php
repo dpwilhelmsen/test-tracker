@@ -20,6 +20,7 @@ class Project_Controller extends Base_Controller
 		  $button_group .= Button::normal('Session From Selected', array('id'=>'selected_tests'));
 		  $button_group .= Button::normal('Add Test', array('onclick'=>'$("#create_modal").modal({backdrop: "static"});')); 
 		$button_group .= ButtonGroup::close();
+		$tab = Session::get('tab');
 		$sections = Tabbable::tabs(
 			Navigation::links(
 				array(
@@ -29,12 +30,13 @@ class Project_Controller extends Base_Controller
 							. View::make('session.session_table', 
 									array('sessions'=>$sessions))
 							.'</div>',
-						true
+						($tab === 1) ? '' : true
 					),
 					array(
 						'Tests',
 						$button_group.View::make('test.test_table', array('tests'=>$tests))
 							->with('ckeditor', new CKEditor()),
+						($tab === 1) ? true : ''
 					),
 				)
 			)
@@ -63,20 +65,20 @@ class Project_Controller extends Base_Controller
 		$project->description = $input['description'];
 		$project->active = 1;
 		$project->save();
-		return Redirect::to('dashboard');
+		return Redirect::back();
 	}
 	
-	public function action_new()
+	private function newProject()
 	{
 		$form = '';
-		$form .= Form::horizontal_open(URL::to('project/add'));
+		$form .= Form::horizontal_open(URL::to('project/add'), 'POST', array('id'=>'create-project-form'));
 		$form .= Form::control_group(Form::label('title', 'Title'),
 				Form::xlarge_text('title'), '');
 		$form .= Form::control_group(Form::label('description', 'Description'),
 				Form::xlarge_textarea('description', '', array('rows' => '3')));
 		$form .= Form::actions(array(Button::primary_submit('Save', array('id'=>'new-project-btn')), Form::button('Cancel')));
 		$form .= Form::close();
-		return View::make('project.new')->with('form', $form);
+		return $form;
 	}
 	
 	public function action_create_session()
@@ -119,7 +121,7 @@ class Project_Controller extends Base_Controller
 			$sessions = Underscore::group($sessions, function($session){
 				return (bool) $session->active;
 			});
-		return View::make('session.session_table', array('sessions'=>$sessions));
+		return render('session.session_table')->with('sessions',$sessions);
 	}
 	
 	public function action_all()
@@ -131,6 +133,7 @@ class Project_Controller extends Base_Controller
 		$projects_sorted['completed'] = Underscore::filter($projects, function($project){
 			return (int) $project->active === 0;
 		});
-		return View::make('project.all')->with('projects', $projects_sorted);
+		return View::make('project.all')->with('projects', $projects_sorted)
+			->with('form',$this->newProject());
 	}
 }

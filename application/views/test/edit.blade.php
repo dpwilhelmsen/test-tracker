@@ -66,7 +66,7 @@
 			</ul>
 			</div>
 	        <div class="test-label"><b>Section: </b></div>
-	        <div class="test-field">
+	        <div class="test-field" style="position:relative">
 	        {{ 	Typeahead::create(Utilities::allSections(), 4, array('name'=>'section','class' => 'span3', 'style' => 'margin: 0 auto;','value'=> Input::old('section')?:($test->area)?$test->area->title:'')) }}</div>
 	        <div class="test-label"><b>Conditions: </b></div>
 	        <div class="test-field">{{ $ckeditor->editor('conditions', Input::old('conditions')?:$test->conditions, Utilities::ckConfig()) }}</div>

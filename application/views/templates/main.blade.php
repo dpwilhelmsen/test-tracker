@@ -48,9 +48,6 @@
               <li>
               	<a href="{{ URL::to('test/all')}}">Tests</a>
               </li>
-              <li>
-              	<a href="{{ URL::to('session/all')}}">Sessions</a>
-              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

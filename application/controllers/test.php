@@ -45,7 +45,7 @@ class Test_Controller extends Base_Controller {
 			$this->process_projects($test, Input::get('project_option'), Input::get('project'));
 			$this->process_types($test, Input::get('type_option'), Input::get('type'));
 			if(!Input::get('session'))
-				return Redirect::back();
+				return Redirect::back()->with('tab',1);
 			$session = Test_Session::find(Input::get('session'));
 			$session->tests()->save(array(array('test_id'=>$test->id,'status'=>0)));
 			return Redirect::back();
