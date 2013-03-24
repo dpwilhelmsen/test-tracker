@@ -15,7 +15,7 @@
 		<td>
 		<div class="pull-right">
 			{{ HTML::link('project/view/'.$project->id, 'View', array('class'=>'btn btn-primary')) }}
-			{{ HTML::link('project/view/'.$project->id, 'Set as Complete', array('class'=>'btn btn-primary')) }}
+			{{ HTML::link('project/complete/'.$project->id, 'Complete', array('class'=>'btn btn-primary')) }}
 		</div>
 		</td>
 	</tr>
@@ -26,7 +26,7 @@
 	<p>No Active Projects</p>
 @endif
 <h1>Compelted Projects</h1>
-@if(!empty($projects['compelted']))
+@if(!empty($projects['completed']))
 <table class="table">
 	<thead>
 		<th>Project Name</th>
@@ -39,7 +39,7 @@
 		<td>
 		<div class="pull-right">
 			{{ Button::primary_link('project/view/'.$project->id, 'View') }}
-			{{  Button::primary_link('project/view/'.$project->id, 'Set as Complete') }}
+			{{  Button::primary_link('project/active/'.$project->id, 'Activate') }}
 		</div>
 		</td>
 	</tr>

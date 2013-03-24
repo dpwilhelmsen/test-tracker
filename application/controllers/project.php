@@ -35,7 +35,7 @@ class Project_Controller extends Base_Controller
 					array(
 						'Tests',
 						$button_group.View::make('test.test_table', array('tests'=>$tests))
-							->with('ckeditor', new CKEditor()),
+							->with('ckeditor', new CKEditor())->with('project',$project),
 						($tab === 1) ? true : ''
 					),
 				)
@@ -63,6 +63,22 @@ class Project_Controller extends Base_Controller
 		$project = new Project();
 		$project->title = $input['title'];
 		$project->description = $input['description'];
+		$project->active = 1;
+		$project->save();
+		return Redirect::back();
+	}
+	
+	public function action_complete($id)
+	{
+		$project = Project::find($id);
+		$project->active = 0;
+		$project->save();
+		return Redirect::back();
+	}
+	
+	public function action_active($id)
+	{
+		$project = Project::find($id);
 		$project->active = 1;
 		$project->save();
 		return Redirect::back();
@@ -121,7 +137,7 @@ class Project_Controller extends Base_Controller
 			$sessions = Underscore::group($sessions, function($session){
 				return (bool) $session->active;
 			});
-		return render('session.session_table')->with('sessions',$sessions);
+		return render('session.session_table',array('sessions'=>$sessions));
 	}
 	
 	public function action_all()

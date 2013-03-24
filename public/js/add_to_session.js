@@ -5,7 +5,6 @@
 		    $("input[name=test]:checked").each(function(){
 		         ids.push(this.value);
 		    });
-			//alert('Selected Tests:' + ids);
 		    session_submit(ids, $('#project_id').val());
 		});
 		
