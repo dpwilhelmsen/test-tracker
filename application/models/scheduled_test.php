@@ -1,5 +1,5 @@
 <?php
-class Scheduled_Test extends Eloquent
+class Scheduled_Test extends BaseModel
 {
 	public static $table = 'scheduled_tests';
 	public $includes = array('test');

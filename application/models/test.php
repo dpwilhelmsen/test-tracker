@@ -1,6 +1,6 @@
 <?php
 
-class Test extends Eloquent
+class Test extends BaseModel 
 {
 	public static $timestamps = true;
 	

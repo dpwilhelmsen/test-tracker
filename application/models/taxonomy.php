@@ -1,5 +1,5 @@
 <?php
-class Taxonomy extends Eloquent
+class Taxonomy extends BaseModel
 {
 	
 }

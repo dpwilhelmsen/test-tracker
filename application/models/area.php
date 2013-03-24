@@ -1,5 +1,5 @@
 <?php
-class Area extends Eloquent
+class Area extends BaseModel
 {
 	public function test()
 	{

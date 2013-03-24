@@ -30,20 +30,25 @@ class Test_Controller extends Base_Controller {
             $test = new Test();
 			$test->name = Input::get('title');
 			$test->description = Input::get('description');
-			//$test->test_type = Input::get('type');
 			$test->status = Input::get('status');
-			//$test->section = Input::get('section');
 			$type = Input::get('type');
 			$test->conditions = Input::get('conditions');
 			$test->steps = Input::get('steps');
 			$test->status = 1;
+			$section = Area::where('title', '=', Input::get('section'))->first()
+			?: new Area(array('title'=>Input::get('section')));
+			$section->save();
+			$test->area_id = $section->id;
 			/*$test->assigned_id = Input::get('title');
 			$test->author_id = Input::get('title');*/
 			$test->save();
 			$this->process_projects($test, Input::get('project_option'), Input::get('project'));
 			$this->process_types($test, Input::get('type_option'), Input::get('type'));
-			
-       return Redirect::to('dashboard');
+			if(!Input::get('session'))
+				return Redirect::back();
+			$session = Test_Session::find(Input::get('session'));
+			$session->tests()->save(array(array('test_id'=>$test->id,'status'=>0)));
+			return Redirect::back();
 	}
 	
 	public function action_save()
@@ -100,7 +105,7 @@ class Test_Controller extends Base_Controller {
 	{
 		if(empty($existing_types) && empty($new_types)) return;
 		if(is_array($existing_types))
-				$test->types()->sync($type);
+				$test->types()->sync($existing_types);
 		if(empty($new_types)) return;
 		$type = new Type(array('title'=>$new_types));
 		$type->save();

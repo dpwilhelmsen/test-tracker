@@ -27,9 +27,15 @@ class Test_Session_Controller extends Base_Controller
 	{
 		$session = Test_Session::find($id);
 		$scheduled_tests = $session->tests()->get();
+		$button_group = ButtonGroup::open(null, array('class'=>'pull-right bottom-margin'));
+		$button_group .= Button::normal('Add Test', array('onclick'=>'$("#create_modal").modal({backdrop: "static"});'));
+		$button_group .= ButtonGroup::close();
 		return View::make('session.view')
 			->with('scheduled_tests', $scheduled_tests)
-			->with('session', $session);
+			->with('session', $session)
+			->with('buttons', $button_group)
+			->with('ckeditor', new CKEditor())
+			->with('project', $session->project()->first());
 	}
 	
 	public function action_test($session_id, $test_id)
@@ -52,9 +58,8 @@ class Test_Session_Controller extends Base_Controller
 			$next_test = $scheduled_tests[$test_index+1];
 		$test = $cur_test->test()->first();
 		$types = $test->types()->get();
-		$sections = $test->sections()->get();
 		$projects = $test->projects()->get();
-		$tax_array = array('test_type'=>$types,'section'=>$sections,'project'=>$projects,);
+		$tax_array = array('test_type'=>$types,'project'=>$projects,);
 		Asset::add('test-status', 'js/test_status.js');
 		return View::make('session.test')
 			->with('test', $test)
@@ -87,9 +92,6 @@ class Test_Session_Controller extends Base_Controller
 			return Response::json(array('error'=>'Error Saving'));
 		$session = Test_Session::find($scheduled_test->session_id);
 		$tests = $session->tests()->get();
-		echo "check status:".Underscore::matches($tests, function($test){
-			return $test->status !== 0;
-		});
 		if(Underscore::matches($tests, function($test){
 			return $test->status !== 0;
 		}))

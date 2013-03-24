@@ -58,6 +58,7 @@
 	        <div style="clear:both; margin-bottom:20px;">
 	        {{ $ckeditor->editor('steps', Input::old('steps'), Utilities::ckConfig()); }}
 	        </div>
+	        <input type="hidden" name="session" id="session" value='{{ (isset($session)) ? $session->id : '' }}' />
 		</form>
     </div>
     <div class="modal-footer">

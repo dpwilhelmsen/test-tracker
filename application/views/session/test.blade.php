@@ -41,7 +41,7 @@
         <div class="test-label"><b>Test Type: </b></div>
         <div class="test-field">@foreach ($taxonomy['test_type'] as $type) {{ $type->title }} @endforeach</div>
         <div class="test-label"><b>Section: </b></div>
-        <div class="test-field">@foreach ($taxonomy['section'] as $section) {{ $section->title }}, @endforeach</div>
+        <div class="test-field">@if($test->area) {{ $test->area->title }} @endif</div>
         <div class="test-label"><b>Project: </b></div>
         <div class="test-field">
         @foreach ($taxonomy['project'] as $project) 
@@ -50,7 +50,7 @@
         <div class="test-label"><b>Conditions: </b></div>
         <div class="test-field">{{ $test->conditions }}</div>
         <div class="test-label"><b>Steps: </b></div>
-        <div class="test-field">{{ nl2br($test->steps) }}</div>
+        <div class="test-field">{{ $test->steps }}</div>
         <div class="test-label"><b>Assigned to: </b></div>
         <div class="test-field">{{ $test->assigned_id }}</div>
         <input type="hidden" name="scheduled_test_id" id="scheduled-test-id" value="{{ $scheduled_test->id }}" />

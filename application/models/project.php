@@ -1,5 +1,5 @@
 <?php
-class Project extends Eloquent
+class Project extends BaseModel
 {
 	public static $timestamps = true;
 	

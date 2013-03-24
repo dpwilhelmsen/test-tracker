@@ -1,5 +1,5 @@
 <?php
-class Test_Session extends Eloquent
+class Test_Session extends BaseModel
 {
 	public function user()
 	{

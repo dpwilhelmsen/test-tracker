@@ -37,8 +37,8 @@
 		<td>{{ $project->title }}</td>
 		<td>
 		<div class="pull-right">
-			{{ HTML::link('project/view/'.$project->id, 'View', array('class'=>'btn btn-primary')) }}
-			{{ HTML::link('project/view/'.$project->id, 'Set as Complete', array('class'=>'btn btn-primary')) }}
+			{{ Button::primary_link('project/view/'.$project->id, 'View') }}
+			{{  Button::primary_link('project/view/'.$project->id, 'Set as Complete') }}
 		</div>
 		</td>
 	</tr>

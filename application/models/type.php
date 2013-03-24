@@ -1,5 +1,5 @@
 <?php
-class Type extends Eloquent
+class Type extends BaseModel 
 {
 	
 }

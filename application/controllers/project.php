@@ -1,4 +1,6 @@
 <?php
+use Underscore\Types\Arrays;
+
 class Project_Controller extends Base_Controller
 {
 	public function action_index()
@@ -23,7 +25,10 @@ class Project_Controller extends Base_Controller
 				array(
 					array(
 						'Sessions',
-						View::make('session.session_table', array('sessions'=>$sessions)),
+						'<div id="session-container">'
+							. View::make('session.session_table', 
+									array('sessions'=>$sessions))
+							.'</div>',
 						true
 					),
 					array(
@@ -83,13 +88,38 @@ class Project_Controller extends Base_Controller
 		$session->project_id = $project->id;
 		$session->active = 1;
 		$session->save();
-		foreach($test_ids as $test_id) {
-			$scheduled_test = new Scheduled_Test();
-			$scheduled_test->session_id = $session->id;
-			$scheduled_test->test_id = $test_id;
-			$scheduled_test->save();
-		}
-		return Response::json(array('status'=>'success'));
+		$tests = Arrays::each($test_ids, function($t){
+			return array('test_id'=>$t, 'status'=>0);
+		});
+		$session->tests()->save($tests);
+		$sessions = $project->sessions()->get();
+		if($sessions)
+			$sessions = Underscore::group($sessions, function($session){
+			return (bool) $session->active;
+		});
+		return Response::json(array('status'=>'success',
+				'markup'=>render('session.session_table', 
+						array('sessions'=>$sessions))));
+	}
+	
+	public function action_requeue_session()
+	{
+		$oldSession = Test_Session::find(Input::get('session'));
+		$tests = Arrays::each($oldSession->tests()->get(), function($t){
+			return array('test_id'=>$t->test_id, 'status'=>0);
+		});
+		$newSession = new Test_Session();
+		$project = Project::find(Input::get('project'));
+		$newSession->project_id = $project->id;
+		$newSession->active = 1;
+		$newSession->save();
+		$newSession->tests()->save($tests);
+		$sessions = $project->sessions()->get();
+		if($sessions)
+			$sessions = Underscore::group($sessions, function($session){
+				return (bool) $session->active;
+			});
+		return View::make('session.session_table', array('sessions'=>$sessions));
 	}
 	
 	public function action_all()
