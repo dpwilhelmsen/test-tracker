@@ -14,6 +14,7 @@ class Create_Tests {
 			$table->string('name', 255);
 			$table->text('description');
 			$table->integer('status');
+			$table->integer('area');
 			$table->text('conditions');
 			$table->text('steps');
 			$table->integer('assigned_id');

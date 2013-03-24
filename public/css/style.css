@@ -51,12 +51,26 @@ hr.reduced-margin {
 	float: left;
 	clear: both;
 	width: 100px;
-	margin-bottom: 10px;
+	margin: 10px 0;
+}
+.test-label:first-child {
+	margin-top:0;
 }
 
 .test-field {
 	float: left;
-	width: 420px;
+	width: 100%;
+}
+input[type="text"].title-input {
+	font-size: 25px;
+	height: 29px;
+	line-height: 1.0em;
+	padding: 5px;
+	width: 97%;
+	font-weight: bold;
+}
+.test-field input[type="text"], .test-field textarea {
+	width:97%;
 }
 
 .form-list {

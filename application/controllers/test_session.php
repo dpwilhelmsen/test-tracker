@@ -38,7 +38,7 @@ class Test_Session_Controller extends Base_Controller
 		$session_project = Project::find($session->project_id);
 		$scheduled_tests = $session->tests()->get();
 		foreach($scheduled_tests as $key => $test)
-		 if($test->id === $test_id){
+		 if($test->test_id === $test_id){
 		 	$test_index = $key;
 		 	continue;
 		}
@@ -87,6 +87,9 @@ class Test_Session_Controller extends Base_Controller
 			return Response::json(array('error'=>'Error Saving'));
 		$session = Test_Session::find($scheduled_test->session_id);
 		$tests = $session->tests()->get();
+		echo "check status:".Underscore::matches($tests, function($test){
+			return $test->status !== 0;
+		});
 		if(Underscore::matches($tests, function($test){
 			return $test->status !== 0;
 		}))

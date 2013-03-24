@@ -29,9 +29,9 @@ class Test extends Eloquent
 		return $this->has_many_and_belongs_to('Type');
 	}
 	
-	public function sections()
+	public function area()
 	{
-		return $this->has_many_and_belongs_to('Area');
+		return $this->belongs_to('Area');
 	}
 	
 	public function projects()

@@ -14,6 +14,7 @@
       }
     </style>
     {{ Asset::container('bootstrapper')->scripts(); }} 
+    {{ Asset::container('ckeditor')->scripts(); }}
     {{ Asset::scripts() }}
 </head>
 <body>
@@ -41,10 +42,6 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li><a href="{{ URL::base() }}">Home</a></li>
-              @if ( !Auth::guest() )
-              <li><a href="#" onclick="$('#create_modal').modal({backdrop: 'static'});">
-          			Add New Test</a></li>
-              @endif
               <li>
               	<a href="{{ URL::to('project/all')}}">Projects</a>
               </li>
@@ -61,7 +58,7 @@
     </div>
  
     <div class="container">
-          <div class="row">
+          <div class="row-fluid">
           @include('plugins.status')
           @yield('content')
           </div>
@@ -73,9 +70,7 @@
             <p>Test Tracker &copy; 2012</p>
         </footer>
       </div>
-      	@if ( !Auth::guest() )
-      		@include('plugins/create')
-      	@else
+      	@if ( Auth::guest() )
       		@include('plugins/login')
       	@endif
 </body>

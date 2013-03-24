@@ -37,4 +37,5 @@ return array(
 	'docs' => array('handles' => 'docs'),
 	'bootstrapper' => array('auto' => true),
 	'underscore' => array('auto' => true),
+	'ckeditor' => array('auto' => true),
 );

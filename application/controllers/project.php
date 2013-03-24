@@ -1,11 +1,4 @@
 <?php
-
-use Laravel\URL;
-
-use Laravel\Response;
-
-use Laravel\Input;
-
 class Project_Controller extends Base_Controller
 {
 	public function action_index()
@@ -22,8 +15,8 @@ class Project_Controller extends Base_Controller
 				return (bool) $session->active;
 			});
 		$button_group = ButtonGroup::open(null, array('class'=>'pull-right bottom-margin'));
-		  $button_group .= Button::normal('Create New Session From Selected', array('id'=>'selected_tests'));
-		  $button_group .= Button::normal('Add All to New Session', array('id'=>'all_tests')); 
+		  $button_group .= Button::normal('Session From Selected', array('id'=>'selected_tests'));
+		  $button_group .= Button::normal('Add Test', array('onclick'=>'$("#create_modal").modal({backdrop: "static"});')); 
 		$button_group .= ButtonGroup::close();
 		$sections = Tabbable::tabs(
 			Navigation::links(
@@ -35,7 +28,8 @@ class Project_Controller extends Base_Controller
 					),
 					array(
 						'Tests',
-						$button_group.View::make('test.test_table', array('tests'=>$tests)),
+						$button_group.View::make('test.test_table', array('tests'=>$tests))
+							->with('ckeditor', new CKEditor()),
 					),
 				)
 			)
@@ -87,7 +81,7 @@ class Project_Controller extends Base_Controller
 		$session = new Test_Session();
 		$project = Project::find($project_id);
 		$session->project_id = $project->id;
-		$session->status = 'active';
+		$session->active = 1;
 		$session->save();
 		foreach($test_ids as $test_id) {
 			$scheduled_test = new Scheduled_Test();

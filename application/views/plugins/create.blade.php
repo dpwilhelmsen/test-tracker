@@ -4,7 +4,7 @@
         <h3>Add a New Test</h3>
     </div>
     <div class="modal-body">
-        <form class="well" method="post" action="{{ URL::to('test/add') }}" id="create_modal_form">
+        <form class="well"  autocomplete='off' method="post" action="{{ URL::to('test/add') }}" id="create_modal_form">
 			<label for="title">Test Title</label>
 			<input name="title" type="text" />
 			<label for="description">Description</label>
@@ -49,12 +49,15 @@
 					</div>
 				</li>
 			</ul>
-			<label for="section">Section</label>
-			<input name="section" type="text" />
-			<label for="conditions">Conditions</label>
-			<textarea name="conditions" cols="20" rows="3"></textarea>
-			<label for="steps">Steps</label>
-			<textarea name="steps" cols="20" rows="3"></textarea>
+			<div class="test-label"><b>Section: </b></div>
+	        <div class="test-field">
+	        {{ 	Typeahead::create(Utilities::allSections(), 4, array('name'=>'section','class' => 'span3', 'style' => 'margin: 0 auto;','value'=> Input::old('section'))) }}</div>
+	        <div class="test-label"><b>Conditions: </b></div>
+	        <div class="test-field">{{ $ckeditor->editor('conditions', Input::old('conditions'), Utilities::ckConfig()) }}</div>
+	        <div class="test-label"><b>Steps: </b></div>
+	        <div style="clear:both; margin-bottom:20px;">
+	        {{ $ckeditor->editor('steps', Input::old('steps'), Utilities::ckConfig()); }}
+	        </div>
 		</form>
     </div>
     <div class="modal-footer">

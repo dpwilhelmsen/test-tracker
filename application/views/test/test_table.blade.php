@@ -1,7 +1,7 @@
 <table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
-					<td>&nbsp;</td>
+					<td id="checkbox-toggle"><input type="checkbox" /></td>
 					<td>Name</td>
 					<td>Test Type</td>
 					<td>Status</td>
@@ -18,7 +18,9 @@
 			<tbody>
 		@foreach ($tests as $test)
 		        <tr>
-		        	<td><input type="checkbox" name="test" value="{{ $test->id }}" /></td>
+		        	<td class="select-test-checkbox">
+		        		<input type="checkbox" name="test" value="{{ $test->id }}" />
+		        	</td>
 		            <td>{{ HTML::link('test/view/'.$test->id, $test->name) }}</td>
 		            <td>
 		            	@foreach ($test->types()->get() as $type) 
@@ -27,9 +29,9 @@
 		            </td>
 		            <td>{{ $test->status }}</td>
 		            <td>
-		            	@foreach ($test->sections()->get() as $section) 
-		            		{{ $section->title }} <br /> 
-		            	@endforeach
+		            	@if($test->area)
+		            	{{ $test->area->title }}
+		            	@endif
 		            </td>
 		            <td>
 		            	@foreach ($test->projects()->get() as $project) 
@@ -46,3 +48,6 @@
 		@endforeach
 			</tbody>
 		</table>
+@if(!Auth::Guest())
+	@include('plugins/create')
+@endif

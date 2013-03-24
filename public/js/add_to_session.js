@@ -17,6 +17,14 @@
 			alert('Selected Tests:' + ids);
 		    session_submit(ids, $('#project_id').val());
 		});
+		
+		$('#checkbox-toggle input[type=checkbox]').click(function(){  
+		    if( $(this).attr('checked') ){  
+		        $('.select-test-checkbox input[type=checkbox]').attr('checked','checked');  
+		    }else{  
+		        $('.select-test-checkbox input[type=checkbox]').removeAttr('checked');  
+		    }  
+		});  
 	});
 	
 	function session_submit(ids, project)
