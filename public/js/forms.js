@@ -37,5 +37,8 @@
 		$('.login-btn').on('click', function(){
 			$('#login_modal').modal({backdrop: 'static'});
 		});
+		$('#import-btn').on('click', function(){
+			$('#import-form').submit();
+		});
 	});
 }(jQuery, window, document));

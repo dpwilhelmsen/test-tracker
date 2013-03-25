@@ -51,6 +51,54 @@ class Test_Controller extends Base_Controller {
 			return Redirect::back();
 	}
 	
+	public function action_import()
+	{
+		$import_tests = Input::file('csv.tmp_name');
+		$file = File::get($import_tests);
+		if(empty($file)) return;
+		$results = Formatter::make($file, 'csv')->to_array();
+		foreach($results as $result) {
+			$section = $result['section'];
+			$projects = $result['project'];
+			$types = $result['type'];
+			unset($result['section']);
+			unset($result['project']);
+			unset($result['type']);
+			$test = Test::create($result);
+			$section = Area::where('title', '=', $section)->first()
+			?: new Area(array('title'=>$section));
+			$section->save();
+			$test->area_id = $section->id;
+			$test->save();
+			$projects = explode('|',$projects);
+			$existingProjects = array();
+			foreach ($projects as $project){
+				if($tmpProject = Project::where('title','=',trim($project))->first()) {
+					$existingProjects[] = $tmpProject->id;
+				}else{
+					$newProject = new Project(array('title'=>$project, 'active'=>true));
+					$newProject->save();
+					$test->projects()->attach($newProject);
+				}		
+			}
+			$test->projects()->sync($existingProjects);
+			$types = explode(',',$types);
+			$existingTypes = array();
+			foreach ($types as $type){
+				if($tmpType = Type::where('title','LIKE',trim($type))->first()) {
+					$existingTypes[] = $tmpType->id;
+				}else{
+					$newType = new Type(array('title'=>$type));
+					$newType->save();
+					$test->types()->attach($newType);
+					$existingTypes[] = $newType->id;
+				}
+			}
+			$test->types()->sync($existingTypes);
+		}
+		return Redirect::back();
+	}
+	
 	public function action_save()
 	{
 		$input = Input::all();

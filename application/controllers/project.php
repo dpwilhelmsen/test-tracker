@@ -18,7 +18,8 @@ class Project_Controller extends Base_Controller
 			});
 		$button_group = ButtonGroup::open(null, array('class'=>'pull-right bottom-margin'));
 		  $button_group .= Button::normal('Session From Selected', array('id'=>'selected_tests'));
-		  $button_group .= Button::normal('Add Test', array('onclick'=>'$("#create_modal").modal({backdrop: "static"});')); 
+		  $button_group .= Button::normal('Add Test', array('onclick'=>'$("#create_modal").modal({backdrop: "static"});'));
+		  $button_group .= Button::normal('Import Tests from CSV', array('onclick'=>'$("#import_modal").modal({backdrop: "static"});'));
 		$button_group .= ButtonGroup::close();
 		$button_group = (!Auth::guest()) ? $button_group : '';
 		$tab = Session::get('tab');

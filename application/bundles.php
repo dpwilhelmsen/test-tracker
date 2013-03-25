@@ -38,4 +38,5 @@ return array(
 	'bootstrapper' => array('auto' => true),
 	'underscore' => array('auto' => true),
 	'ckeditor' => array('auto' => true),
+	'formatter' => array('auto' => true),
 );
