@@ -7,7 +7,7 @@ class TestTableSeeder extends Seeder {
 		DB::table('tests')->delete();
 		
 		Test::create(array(
-				'name' => 'First Test',
+				'title' => 'First Test',
 				'description' => 'Project description',
 				'area' => Area::all()->first()->id,
 				'conditions' => 'Some Conditions',

@@ -1,16 +1,11 @@
 <?php
-class Organization extends Eloquent 
+class Organization extends BaseModel 
 {
 	protected $table = 'organizations';
 	
-	public static function validate($input)
-	{
-		$rules = array(
+	public static $rules = array(
 			'title' => 'Required|Unique:organizations'
 		);
-		
-		return Validator::make($input, $rules);
-	}
 	
 	public function users()
 	{

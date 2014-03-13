@@ -1,7 +1,19 @@
 <?php
-class Test extends Eloquent
+class Test extends BaseModel
 {
 	protected $table = 'tests';
+	public static $rules = array(
+			'title' => 'Required',
+			'area' => 'belongs_to_user_organization'
+	);
+	
+	public static function boot()
+	{
+		parent::boot();
+		static::saving(function($test){
+			$test->prepareFields();
+		});
+	}	
 	
 	public function scheduled_tests()
 	{
@@ -30,6 +42,16 @@ class Test extends Eloquent
 	
 	public function user()
 	{
-		return $this->belongsToMany('User');
+		return $this->belongsTo('User');
+	}
+	
+	public function prepareFields()
+	{
+		return true;
+	}
+	
+	public function organization()
+	{
+		return $this->belongsTo('Organization');
 	}
 }

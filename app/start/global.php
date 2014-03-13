@@ -81,3 +81,18 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+Validator::extend('belongs_to_user_organization', function($attribute, $value, $parameters)
+{
+	$user = isset($paramaters['user']) 
+		? User::find((int) $paramaters['user']) : Auth::user();
+	if(!is_a($user, 'User')) return false;
+	$model = call_user_func(array(ucfirst($attribute),'find'), (int) $value);
+	return is_a($model, ucfirst($attribute)) 
+		and $user->hasAccess($model->organization->id);
+});
+
+Validator::extend('is_a', function($attribute, $value, $parameters)
+{
+	return is_a($parameters[0]::find($value). $parameters[0]);
+});

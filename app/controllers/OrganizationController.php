@@ -34,21 +34,14 @@ class OrganizationController extends \BaseController {
 	 * @return Response
 	 */
 	public function store()
-	{
-		$validation = Organization::validate(Input::all());
-		
-		if($validation->fails())
-			return Response::json(array(
-					'error' => true,
-					'message' => $validation->getMessages()
-						->all('<p>:message</p>'))
-			);
-		
+	{		
 		$organization = new Organization();
 		$organization->title = Input::get('title');
 		$organization->setSlug();
 		
-		$organization->save();
+		if(!$organization->save())
+			return Helpers::errorResponse($organization->errors
+					->all('<p>:message</p>'));
 		
 		$organization->users()->save(Auth::user());
 		
@@ -74,10 +67,7 @@ class OrganizationController extends \BaseController {
 					'error' => false,
 					'organization' => $organization->toArray()),
 					200)
-			: Response::json(array(
-					'error' => true,
-					'message' => 'Organization not found or you are not a member of that organization.'),
-					200);
+			: Helpers::errorResponse('Organization not found or you are not a member of that organization.');
 	}
 
 	/**
@@ -98,16 +88,7 @@ class OrganizationController extends \BaseController {
 	 * @return Response
 	 */
 	public function update($id)
-	{
-		$validation = Organization::validate(Input::all());
-		
-		if($validation->fails())
-			return Response::json(array(
-					'error' => true,
-					'message' => $validation->getMessages()
-					->all('<p>:message</p>'))
-			);
-		
+	{		
 		$organization =  Auth::user()->organizations()->where('organization_id', $id)->first();
 		//$organization =  Auth::user()->organizations()->find($id);
 		
@@ -117,7 +98,9 @@ class OrganizationController extends \BaseController {
 			$organization->setSlug();
 		}
 		
-		$organization->save();
+		if(!$organization->save())
+			return Helpers::errorResponse($organization->errors
+					->all('<p>:message</p>'));
 		
 		return Response::json(array(
 				'error' => false,
@@ -137,10 +120,7 @@ class OrganizationController extends \BaseController {
 		$organization = Auth::user()->organizations()->where('organization_id', $id)->first();
 		
 		if(!$organization)
-			return Response::json(array(
-					'error' => true,
-					'message' => 'Organization not found or you are not a member of that organization.'),
-					200);
+			return Helpers::errorResponse('Organization not found or you are not a member of that organization.');
 		
 		$organization->delete();
 		

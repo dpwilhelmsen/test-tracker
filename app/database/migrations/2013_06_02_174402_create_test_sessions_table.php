@@ -19,7 +19,9 @@ class CreateTestSessionsTable extends Migration {
 			$table->boolean('active');
 			$table->integer('project_id');
 			$table->integer('user_id');
+			$table->integer('organization_id');
 			$table->date('completed_at');
+			$table->text('test_order');
 			$table->timestamps();
 		});
 	}

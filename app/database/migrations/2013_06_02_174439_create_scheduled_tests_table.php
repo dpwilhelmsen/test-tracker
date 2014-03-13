@@ -20,8 +20,7 @@ class CreateScheduledTestsTable extends Migration {
 			$table->integer('status');
 			$table->integer('assigned_user');
 			$table->integer('completed_user');
-			$table->integer('weight');
-			$table->integer('defects');
+			$table->text('defects');
 			$table->timestamps();
 		});
 	}

@@ -1,7 +1,11 @@
 <?php
-class Project extends Eloquent
+class Project extends BaseModel
 {
 	protected $table = 'projects';
+	
+	public static $rules = array(
+				'title' => 'required',
+		);
 	
 	public function tests()
 	{
@@ -11,5 +15,10 @@ class Project extends Eloquent
 	public function sessions()
 	{
 		return $this->hasMany('TestSession');
+	}
+	
+	public function organization()
+	{
+		return $this->belongsTo('Organization');
 	}
 }

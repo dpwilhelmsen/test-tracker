@@ -1,8 +1,13 @@
 <?php
-class ScheduledTest extends Eloquent
+class ScheduledTest extends BaseModel
 {
 	protected $table = 'scheduled_tests';
 	public $includes = array('test');
+	public static $rules = array(
+			'session' => 'required|is_a:Session',
+			'test' => 'required|is_a:Test',
+			'status' => 'required',
+	);
 	
 	public function session()
 	{

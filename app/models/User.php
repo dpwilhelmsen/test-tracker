@@ -3,7 +3,7 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends BaseModel implements UserInterface, RemindableInterface {
 
 	/**
 	 * The database table used by the model.
@@ -52,6 +52,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function organizations()
 	{
 		return $this->belongsToMany('Organization');
+	}
+	
+	public function hasAccess($organizationId)
+	{
+		return is_a($this->organizations()
+				->where('organization_id', $organizationId)->first(), 'Organization');
 	}
 
 }
